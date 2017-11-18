@@ -6,10 +6,12 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 const  mongoose = require('mongoose');
 
+
 var index = require('./routes/index');
 var users = require('./routes/users');
 
 require('./config/database-setup');
+require('./config/passport-setup');
 
 var app = express();
 
