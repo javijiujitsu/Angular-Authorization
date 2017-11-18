@@ -7,12 +7,14 @@ var bodyParser = require('body-parser');
 const  mongoose = require('mongoose');
 const passport   = require('passport');
 const session    = require('express-session');
+const bcrypt     =  require('bcrypt');
 
 
 
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var authRoutes = require('./routes/auth-routes');
 
 require('./config/database-setup');
 require('./config/passport-setup');
@@ -45,6 +47,7 @@ app.use(passport.session());
 
 app.use('/', index);
 app.use('/users', users);
+app.use('/', authRoutes);
 
 
 // catch 404 and forward to error handler
