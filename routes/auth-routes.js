@@ -37,16 +37,38 @@ router.post('/signup', (req, res, next) => {
         req.login(theUser, (err) => {
         res.status(200).json(req.user);
       });
-
     });
-
-
   });
-
 });
 
 
+//Log in Post
 
+router.post('/login', (req, res, next) => {
+   const username = req.body.username;
+   const password = req.body.password;
+
+   // see id the username is a valid username
+
+  User.findOne({ username: username }, (err, foundUser) => {
+
+    if (!foundUser) {
+      res.status(400).json({ message: 'Incorrect username'});
+      return;
+    }
+
+  if (!bcrypt.compareSync(password, foundUser.password)) {
+    res.status(400).json({ message: 'Incorrect password'});
+    return;
+  }
+
+   req.login(foundUser, (err) => {
+      res.status(200).json(foundUser);
+   });
+
+});
+
+});
 
 
 
