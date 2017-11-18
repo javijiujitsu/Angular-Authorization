@@ -35,6 +35,7 @@ router.post('/signup', (req, res, next) => {
           return;
         }
         req.login(theUser, (err) => {
+          theUser.password = undefined;
         res.status(200).json(req.user);
       });
     });
@@ -63,6 +64,7 @@ router.post('/login', (req, res, next) => {
   }
 
    req.login(foundUser, (err) => {
+     foundUser.password = undefined;
       res.status(200).json(foundUser);
    });
 
