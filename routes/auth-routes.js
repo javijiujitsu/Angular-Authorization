@@ -72,7 +72,30 @@ router.post('/login', (req, res, next) => {
 
 });
 
+// Logout
 
+router.post('/logout', (req, res, next) => {
+  req.logout();
+  res.status(200).json({ message: 'Logout Success' });
+});
+
+router.get('/loggedin', (req, res, next) => {
+  if (req.isAuthenticated()) {
+    res.status(200).json(req.user);
+    return;
+  }// Checking if loged in or not
+
+  res.status(403).json({ message: 'Unauthorized' });
+});
+
+router.get('/private', (req, res, next) => {
+  if (req.isAuthenticated()) {
+    res.json({ message: 'This is a private message' });
+    return;
+  } // If loged in, show the secret info. Otherwise show unauthorized
+
+  res.status(403).json({ message: 'Unauthorized' });
+});
 
 
 
