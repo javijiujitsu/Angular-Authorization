@@ -38,6 +38,7 @@ app.use(session({
   secret: 'string is to avoid a warning',
   resave: true,
   saveUninitialized: true,
+  cookie : { httpOnly: true, maxAge: 2419200000 }
 }));
 
 app.use(passport.initialize());
